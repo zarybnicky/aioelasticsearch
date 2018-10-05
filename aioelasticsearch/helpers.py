@@ -1,14 +1,13 @@
 import asyncio
-
 import logging
 from operator import methodcaller
 
-from aioelasticsearch import NotFoundError
-from elasticsearch.helpers import ScanError, _chunk_actions, expand_action
 from elasticsearch.exceptions import TransportError
+from elasticsearch.helpers import ScanError, _chunk_actions, expand_action
+
+from aioelasticsearch import NotFoundError
 
 from .compat import PY_352
-
 
 __all__ = ('Scan', 'ScanError')
 

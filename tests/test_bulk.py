@@ -4,8 +4,8 @@ import logging
 
 import pytest
 
-from aioelasticsearch.helpers import bulk, concurrency_bulk, _retry_handler
 from aioelasticsearch import Elasticsearch, TransportError
+from aioelasticsearch.helpers import _retry_handler, bulk, concurrency_bulk
 
 logger = logging.getLogger('elasticsearch')
 
@@ -85,10 +85,12 @@ async def test_bulk_raise_exception(loop):
 async def test_retry_handler(es):
     async def mock_data():
         # finish_count, [( es_action, source_data ), ... ]
-        return 0, [(
-            {'index': {'_index': 'test_aioes', '_type': 'test_aioes', '_id': 100}},
-            {'name': 'Karl 1', 'email': 'karl@example.com'}),
-            ({'index': {'_index': 'test_aioes', '_type': 'test_aioes','_id': 101}},
+        return 0, [
+            ({'index': {'_index': 'test_aioes', '_type': 'test_aioes',
+                        '_id': 100}},
+             {'name': 'Karl 1', 'email': 'karl@example.com'}),
+            ({'index': {'_index': 'test_aioes', '_type': 'test_aioes',
+                        '_id': 101}},
              {'name': 'Karl 2', 'email': 'karl@example.com'})]
 
     done, fail = await _retry_handler(es,

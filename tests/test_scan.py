@@ -1,12 +1,10 @@
 import logging
-
 from unittest import mock
 
 import pytest
 
 from aioelasticsearch import NotFoundError
 from aioelasticsearch.helpers import Scan, ScanError
-
 
 logger = logging.getLogger('elasticsearch')
 
