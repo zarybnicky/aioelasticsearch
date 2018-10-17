@@ -6,7 +6,7 @@ from setuptools import setup
 
 
 def get_version():
-    regex = r"__version__\s=\s\'(?P<version>[\d\.]+?-mundo)\'"
+    regex = r"__version__\s=\s\'(?P<version>[\d\.]+?-.*?)\'"
 
     path = ('aioelasticsearch', '__init__.py')
 
